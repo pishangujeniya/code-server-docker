@@ -1,0 +1,48 @@
+version: "3.8"
+configs:
+  ngrok-yml:
+    content: |
+      version: "2"
+      authtoken: "${NGROK_AUTH_TOKEN}"
+      region: "in"
+      tunnels:
+        example:
+          proto: "http"
+          addr: "code-server:8443"
+services:
+  code-server:
+    build: .
+    container_name: code-server
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - PASSWORD=${CODE_SERVER_PASSWORD}
+      - SUDO_PASSWORD=${CODE_SERVER_PASSWORD}
+      - DEFAULT_WORKSPACE=/config/workspace
+    volumes:
+      - ./config:/config
+    ports:
+      - 8443:8443
+    restart: unless-stopped
+  ngrok-server:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    configs:
+      - source: ngrok-yml
+        target: /etc/ngrok.yml
+    ports:
+      - 4040:4040
+
