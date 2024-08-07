@@ -1,6 +1,6 @@
 # FROM debian:buster-slim
 
-FROM lscr.io/linuxserver/code-server:latest
+FROM lscr.io/linuxserver/code-server:4.91.1
 
 ENV SHELL /bin/bash
 

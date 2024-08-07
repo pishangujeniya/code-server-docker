@@ -29,7 +29,7 @@ Please update the values mentioned in the [./env](./env) file
 To get started with this project, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Update the environment variables in the `.env` file with your Ngrok authentication token and code-server password.
+2. Update the environment variables in the `.env` file with your Ngrok authentication token in double quotes and code-server password.
 3. Execute `docker compose up` to start the code-server and ngrok.
 4. Access your code-server instance via the ngrok-provided URL in your web browser at [http://localhost:4040](http://localhost:4040).
 
