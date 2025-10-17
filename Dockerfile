@@ -1,6 +1,6 @@
 # FROM debian:buster-slim
 
-FROM lscr.io/linuxserver/code-server:4.91.1
+FROM lscr.io/linuxserver/code-server:4
 
 ENV SHELL /bin/bash
 
@@ -28,10 +28,14 @@ RUN sudo apt install unzip -y
 RUN sudo apt install wget -y
 # Install Wget - END
 
-# Install Conda - START
-ENV PATH=/opt/conda/bin:$PATH
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
- && /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p /opt/conda \
- && rm Miniconda3-latest-Linux-x86_64.sh \
- && conda install --quiet --yes jupyter
-# Install Conda - END
+# # Install Conda - START
+# ENV PATH=/opt/conda/bin:$PATH
+# RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+#  && /bin/bash Miniconda3-latest-Linux-x86_64.sh -f -b -p /opt/conda \
+#  && rm Miniconda3-latest-Linux-x86_64.sh \
+#  && conda install --quiet --yes jupyter
+# # Install Conda - END
+
+# Install Wget - START
+RUN sudo apt install nodejs -y
+# Install Wget - END
